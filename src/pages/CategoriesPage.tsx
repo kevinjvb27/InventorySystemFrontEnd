@@ -1,10 +1,11 @@
 import React from 'react';
+import CategoriesForm from '../components/CategoriesForm';
 
 const CategoriesPage = () => {
   return (
     <div>
-      <h1>Gestión de Categorias</h1>
-      {/* Aquí irá la lógica para listar, crear, editar y eliminar productos */}
+      <h1>Gestión de Categorías</h1>
+      <CategoriesForm />
     </div>
   );
 };
