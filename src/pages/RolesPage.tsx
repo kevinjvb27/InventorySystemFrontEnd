@@ -17,18 +17,18 @@ const RolesPage = () => {
     loadRoles();
   }, []);
 
-  const handleCreate = async (newRole: Omit<Role, "codigorol">) => {
+  const handleCreate = async (newRole: Omit<Role, "codigoRoles">) => {
     await createRole(newRole);
     loadRoles();
   };
 
-  const handleUpdate = async (id: string, updatedRole: Omit<Role, "codigorol">) => {
+  const handleUpdate = async (id: number, updatedRole: Omit<Role, "codigoRoles">) => {
     await updateRole(id, updatedRole);
     loadRoles();
     setEditingRole(null);
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     await deleteRole(id);
     loadRoles();
   };
@@ -37,7 +37,7 @@ const RolesPage = () => {
     <div>
       <h1>Gestión de Roles</h1>
       <RoleForm 
-        onSubmit={editingRole ? (data) => handleUpdate(editingRole.codigorol, data) : handleCreate} 
+        onSubmit={editingRole ? (data) => handleUpdate(editingRole.codigoRoles, data) : handleCreate} 
         initialValues={editingRole || { rol: '', descripcion: '' }} 
       />
       <RolesTable 

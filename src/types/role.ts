@@ -1,8 +1,8 @@
 export interface Role {
-    codigorol: string;
+    codigoRoles: number;
     rol: string;
     descripcion: string;
-    fechacreacion: string;
+    fechacreacion?: string;
   }
   
-  export type NewRole = Omit<Role, 'codigorol' | 'fechacreacion'>;
+  export type NewRole = Omit<Role, 'codigoRoles' | 'fechacreacion'>;

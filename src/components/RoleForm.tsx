@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Role } from '../types/role';
 
 interface RoleFormProps {
-  onSubmit: (data: Omit<Role, "codigorol">) => void;
-  initialValues: Omit<Role, "codigorol">;
+  onSubmit: (data: Omit<Role, "codigoRoles">) => void;
+  initialValues: Omit<Role, "codigoRoles">;
 }
 
 const RoleForm = ({ onSubmit, initialValues }: RoleFormProps) => {
@@ -41,7 +41,7 @@ const RoleForm = ({ onSubmit, initialValues }: RoleFormProps) => {
           required 
         />
       </div>
-      <button type="submit">{initialValues.codigorol ? 'Actualizar' : 'Crear'}</button>
+      <button type="submit">{initialValues.rol ? 'Actualizar' : 'Crear'}</button>
     </form>
   );
 };

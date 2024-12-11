@@ -3,7 +3,7 @@ import { Role } from '../types/role';
 interface RolesTableProps {
   roles: Role[];
   onEdit: (role: Role) => void;
-  onDelete: (id: string) => void;
+  onDelete: (id: number) => void;
 }
 
 const RolesTable = ({ roles, onEdit, onDelete }: RolesTableProps) => {
@@ -19,13 +19,13 @@ const RolesTable = ({ roles, onEdit, onDelete }: RolesTableProps) => {
       </thead>
       <tbody>
         {roles.map((role) => (
-          <tr key={role.codigorol}>
+          <tr key={role.codigoRoles}>
             <td>{role.rol}</td>
             <td>{role.descripcion}</td>
-            <td>{new Date(role.fechacreacion).toLocaleString()}</td>
+            <td>{role.fechacreacion ? new Date(role.fechacreacion).toLocaleString() : 'Fecha no disponible'}</td>
             <td>
               <button onClick={() => onEdit(role)}>Editar</button>
-              <button onClick={() => onDelete(role.codigorol)}>Eliminar</button>
+              <button onClick={() => onDelete(role.codigoRoles)}>Eliminar</button>
             </td>
           </tr>
         ))}
