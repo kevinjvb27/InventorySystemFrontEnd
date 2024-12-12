@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { createProduct } from '../services/productService';
 import { getCategories } from '../services/categoryService';
 import { Category } from '../types/category';
 import { ProductInput } from '../types/product';
 
 type ProductFormProps = {
-    onFormSubmit: () => void;
+    onFormSubmit: (data: ProductInput) => void;
+    initialValues: ProductInput;
 };
 
-const ProductForm: React.FC<ProductFormProps> = ({ onFormSubmit }) => {
+const ProductForm: React.FC<ProductFormProps> = ({ onFormSubmit, initialValues }) => {
     const [categories, setCategories] = useState<Category[]>([]);
-    const [formValues, setFormValues] = useState<ProductInput>({
-        codigoproducto: '',
-        producto: '',
-        descripcion: '',
-        precio: 0,
-        cantidad: 0,
-        activo: true,
-        codigocategoria: ''
-    });
+    const [formValues, setFormValues] = useState<ProductInput>(initialValues);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -37,11 +29,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ onFormSubmit }) => {
         setFormValues({ ...formValues, [name]: value });
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await createProduct(formValues);
-            onFormSubmit();
+            onFormSubmit(formValues);
         } catch (error) {
             console.error('Error creating product:', error);
         }
@@ -127,7 +118,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ onFormSubmit }) => {
                     ))}
                 </select>
             </label>
-            <button type="submit">Guardar Producto</button>
+            <button type="submit">{initialValues.producto ? 'Actualizar' : 'Crear'}</button>
         </form>
     );
 };

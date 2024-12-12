@@ -3,9 +3,10 @@ import { Product } from '../types/product';
 
 type ProductsTableProps = {
     products: Product[];
+    onEdit: (product: Product) => void;
 };
 
-const ProductsTable: React.FC<ProductsTableProps> = ({ products }) => {
+const ProductsTable: React.FC<ProductsTableProps> = ({ products, onEdit }) => {
     return (
         <table>
             <thead>
@@ -19,6 +20,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ products }) => {
                     <th>Categoría</th>
                     <th>Fecha Creación</th>
                     <th>Última Modificación</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +35,9 @@ const ProductsTable: React.FC<ProductsTableProps> = ({ products }) => {
                         <td>{product.codigocategoria}</td>
                         <td>{product.fechacreacion ? new Date(product.fechacreacion).toLocaleString() : 'Fecha no disponible'}</td>
                         <td>{product.modificacion ? new Date(product.modificacion).toLocaleString() : 'Fecha no disponible'}</td>
+                        <td>
+                            <button onClick={() => onEdit(product)}>Editar</button>
+                        </td>
                     </tr>
                 ))}
             </tbody>

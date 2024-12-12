@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Product} from '../types/product';
+import { Product, ProductInput} from '../types/product';
 import { getToken } from '../utils/tokenManager';
 
 const API_URL = '/api/productos';
@@ -18,6 +18,16 @@ export const getAllProducts = async () => {
 export const createProduct = async (product: Product)=> {
     const token = getToken();
     const response = await axios.post(API_URL, product, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  };
+
+  export const updateProduct = async (id: string, product: ProductInput) => {
+    const token = getToken();
+    const response = await axios.put(`${API_URL}/${id}`, product, {
       headers: {
         Authorization: `Bearer ${token}`
       }
